@@ -73,7 +73,7 @@ markdown是一种轻量标记语言。
 - 两端对齐: `:---:`
 
 ## 围栏代码
-使用三个`````
+使用三个```包裹代码。
 ```
 echo "hello!"
 ```
@@ -102,7 +102,7 @@ Here's a simple footnote,[^1] and here's a longer one.[^bignote]
 ```
 
 ```
-[text](#标text
+[text](#标text)
 ```
 
 [跳转](#引用语法)
