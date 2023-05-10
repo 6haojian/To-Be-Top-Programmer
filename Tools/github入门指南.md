@@ -98,12 +98,72 @@ git add filename
 
 **状态简览**
 
+```bash
+git status -s
+```
 
+**忽略文件**
+一些不需要的文件无需纳入Git管理
 
+文件`.gitignore`，使用标准的glob模式匹配（shell简化的正则表达式）
 
+```
+# 忽略所有的.a文件
+*.a
 
+# 但跟踪所有的lib.a，即使前面忽略了.a文件
+!lib.a
 
+# 只忽略当前目录下的TODO文件，而不忽略 subdir/TODO
+/TODO
 
+# 忽略任何目录下名为build的文件夹
+build/
+
+# 忽略doc/notes.txt，但不忽略doc/server/arch.txt
+doc/*.txt
+
+# 忽略doc/ 目录及其所有子目录下的.pdf文件
+doc/**/*.pdf
+```
+
+**查看已暂存和未暂存的修改**
+- 当前做的哪些更新尚未暂存
+- 哪些更新已暂存并准备下次提交
+
+```bash
+git diff
+```
+
+此命令比较工作目录中当前文件和暂存区域快照之间的差异，也就是修改之后还没有暂存起来的变化的内容。
+
+```bash
+git diff --staged
+```
+
+此命令比较已暂存文件与最后一次提交的文件差异。
+
+**提交更新**
+每次提交前，先用`git status`看下，需要的文件是不是已暂存，然后再执行`git commit`
+
+```bash
+git commit -m "first commit"
+```
+
+每次的提交都是对项目做一次快照，以后可以回到这个状态或进行比较。
+
+**移除文件**
+
+```bash
+git rm
+```
+
+**移动文件**
+底层实际是先删除文件再重新添加
+
+```bash
+git mv file1 file2
+```
 
 
 
