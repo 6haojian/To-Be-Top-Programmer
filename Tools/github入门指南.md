@@ -165,6 +165,58 @@ git rm
 git mv file1 file2
 ```
 
+## 2.3 查看提交历史
+```bash
+git log
+```
+
+`git log`按时间先后顺序列出所有提交，最近的更新排在最上面。
+
+```bash
+git log --stat
+```
+
+`--stat`选项在每次提交的下面列出所有被修改过的文件、有多少文件被修改了以及被修改的文件的哪些行被移除或是添加了。
+
+```bash
+git log --pretty=oneline
+```
+
+将每个提交放在一行显示，在浏览大量的提交时非常有用。
+
+## 2.4 撤销操作
+
+**撤销操作**
+提交完后发现遗漏了几个文件没有添加，或者提交信息写错了，`--amend`选项重新提交（相当于覆盖上一次提交）
+```bash
+git commit --amend
+```
+
+**取消暂存的文件**
+
+```bash
+git reset HEAD filename
+```
+
+**撤销对文件的修改**
+```bash
+git checkout -- filename
+```
+
+## 2.5 远程仓库的使用
+**查看远程仓库**
+```bash
+git remote -v
+```
+
+`git clone`自动添加远程仓库
+`git remote add <shortname> <url>`手动添加同时指定简写
+
+```bash
+git remote add 
+
+
+
 
 
 
