@@ -155,3 +155,38 @@ ficaption元素是与其关联的图片的说明/标题。
 **视频和音频内容**
 `<video>` 元素允许嵌入一段视频。
     <vide src="" controls></vide>
+
+# Iframe
+`<iframe>` 元素旨在允许你将其他 Web 文档嵌入到当前文档中。这很适合将第三方内容嵌入你的网站，你可能无法直接控制，也不希望实现自己的版本。
+
+```html
+<iframe src="https://developer.mozilla.org/zh-CN/docs/Glossary"
+        width="100%" height="500" frameborder="0"
+        allowfullscreen sandbox>
+  <p> <a href="https://developer.mozilla.org/zh-CN/docs/Glossary">
+    Fallback link for browsers that don't support iframes
+  </a> </p>
+</iframe>
+```
+
+**只有在必要时嵌入**第三方内容如视频和地图。
+
+**使用https**
+1. HTTPS 减少了远程内容在传输过程中被篡改的机会
+2. HTTPS 防止嵌入式内容访问你的父文档中的内容
+
+# 在网页中添加矢量图
+- 位图使用像素网格来定义
+  一个位图文件精确得包含了每个像素的位置和它的色彩信息。
+  流行的位图格式包括 Bitmap (.bmp), PNG (.png), JPEG (.jpg), and GIF (.gif.)
+- 矢量图使用算法来定义
+  一个矢量图文件包含了图形和路径的定义，电脑可以根据这些定义计算出当它们在屏幕上渲染时应该呈现的样子。 SVG 格式可以让我们创造用于 Web 的精彩的矢量图形。
+
+SVG 是用于描述矢量图像的XML语言。VG 用于标记图形，而不是内容。
+
+矢量图编辑工具[INKSCAPE](https://inkscape.org/en/)
+
+# HTML表格
+表格是由行和列组成的结构化数据集（表格数据），它让你快速简单地查找某个表示不同类型数据之间的某种关系的值。
+
+
