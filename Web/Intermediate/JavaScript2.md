@@ -327,3 +327,280 @@ var objectName = {
 ```
 
 **点表示法**
+使用点表示法 (dot notation) 来访问对象的属性和方法。
+
+对象的名字表现为一个命名空间 (namespace)，它必须写在第一位——当你想访问对象内部的属性或方法时，然后是一个点 (.)，紧接着是你想要访问的项目，标识可以是简单属性的名字 (name)，或者是数组属性的一个子元素，又或者是对象的方法调用。
+
+**this的含义**
+```JavaScript
+greeting: function() {
+  alert('Hi! I\'m ' + this.name.first + '.');
+}
+```
+关键字"this"指向了当前代码运行时的对象。
+
+# 对象原型
+JavaScript 中所有的对象都有一个内置属性，称为它的 prototype（原型）。它本身是一个对象，故原型对象也会有它自己的原型，逐渐构成了原型链。原型链终止于拥有 null 作为其原型的对象上。
+
+当你试图访问一个对象的属性时：如果在对象本身中找不到该属性，就会在原型中搜索该属性。如果仍然找不到该属性，那么就搜索原型的原型，以此类推，直到找到该属性，或者到达链的末端，在这种情况下，返回 undefined。
+
+**属性遮蔽**
+一个对象中定义了一个属性，而在该对象的原型中定义了一个同名的属性，默认覆盖原型的属性。
+
+**构造函数**
+在 JavaScript 中，所有的函数都有一个名为 prototype 的属性。当你调用一个函数作为构造函数时，这个属性被设置为新构造对象的原型（按照惯例，在名为 __proto__ 的属性中）。
+
+方法是在原型上定义的，但数据属性是在构造函数中定义的。
+
+# 面向对象编程基本概念
+
+面向对象编程将一个系统抽象为许多对象的集合，每一个对象代表了这个系统的特定方面。对象包括函数（方法）和数据。一个对象可以向其他部分的代码提供一个公共接口，而其他部分的代码可以通过公共接口执行该对象的特定操作，系统的其他部分不需要关心对象内部是如何完成任务的，这样保持了对象自己内部状态的私有性。
+
+当人们谈论面向对象编程时，通常来说是指基于类的面向对象编程。
+
+**类与实例**
+当我们使用面向对象编程的术语对一个问题进行建模时，我们会创建一系列抽象的定义，这些定义代表了系统中存在的各类对象。
+
+就其本身而言，类并不做任何事情，类只是一种用于创建具体对象的模板。
+
+```JavaScript
+class Professor
+    properties
+        name
+        teaches
+    constructor
+        Professor(name, teaches)
+    methods
+        grade(paper)
+        introduceSelf()
+```
+
+Professor 类可以创建一个具体的教授，我们称这样创建出来的具体教授为 Professor 类的实例。由类创建实例的过程是由一个特别的函数——构造函数所完成的。
+开发人员将类所需要的值传入构造函数，构造函数即可根据传入的值初始化实例的内部状态。
+
+通常来说，需要将构造函数作为类定义的一部分明确声明，并且构造函数通常具有和类名相同的函数名。编程语言通常使用 new 关键字来表示执行构造函数。
+
+**继承**
+
+当一个方法拥有相同的函数名，但是在不同的类中可以具有不同的实现时，称这一特性为多态。当一个方法在子类中替换了父类中的实现时，称之为子类重写/重载了父类中的实现。
+
+**封装**
+当其他部分的代码想要执行对象的某些操作时，可以借助对象向外部提供的接口完成操作，借此，对象保持了自身的内部状态不会被外部代码随意修改。也就是说，对象的内部状态保持了私有性，而外部代码只能通过对象所提供的接口访问和修改对象的内部状态，不能直接访问和修改对象的内部状态。保持对象内部状态的私有性、明确划分对象的公共接口和内部状态，这些特性称之为封装（encapsulation）。
+
+封装的好处在于，当程序员需要修改一个对象的某个操作时，程序员只需要修改对象对应方法的内部实现即可，而不需要在所有代码中找出该方法的所有实现，并逐一修改。某种意义上来说，封装在对象内部和对象外部设立了一种特别的“防火墙”。
+
+在许多面向对象编程语言中，我们可以使用 private 关键字标记对象的私有部分，也就是外部代码无法直接访问的部分。如果一个属性在被标记为 private 的情况下，外部代码依旧尝试访问该属性，那么通常来说，计算机会抛出一个错误。
+
+# JavaScript中的类
+**类和构造函数**
+使用 class 关键字声明一个类
+```JavaScript
+class Person {
+
+  name;
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  introduceSelf() {
+    console.log(`Hi! I'm ${this.name}`);
+  }
+
+}
+```
+
+- 一个 name 属性
+- 一个需要 name 参数的构造函数，这一参数用于初始化新的对象的 name 属性。
+- 一个 introduceSelf() 方法，使用 this 引用了对象的属性。
+
+构造函数使用 constructor 关键字来声明。
+- 创建一个新的对象
+- 将 this 绑定到这个新的对象，你可以在构造函数代码中使用 this 来引用它
+- 执行构造函数中的代码
+- 返回这个新的对象
+
+我们使用类的名字来调用构造函数。
+
+```JavaScript
+const giles = new Person('Giles');
+```
+
+**省略构造函数**
+如果你不需要任何特殊的初始化内容，你可以省略构造函数，默认的构造函数会被自动生成。
+
+**继承**
+使用 extends 关键字来声明这个类继承自另一个类。
+
+```JavaScript
+class Professor extends Person {
+
+  teaches;
+
+  constructor(name, teaches) {
+    super(name);
+    this.teaches = teaches;
+  }
+
+  introduceSelf() {
+    console.log(`My name is ${this.name}, and I will be your ${this.teaches} professor.`);
+  }
+
+  grade(paper) {
+    const grade = Math.floor(Math.random() * (5 - 1) + 1);
+    console.log(grade);
+  }
+
+}
+```
+> 如果子类有任何自己的初始化内容需要完成，它也必须先使用 super() 来调用父类的构造函数，并传递父类构造函数期望的任何参数。
+
+**封装**
+私有数据属性必须在类的声明中声明，而且其名称需以 # 开头。
+
+```JavaScript
+class Student extends Person {
+
+  #year;
+
+  constructor(name, year) {
+    super(name);
+    this.#year = year;
+  }
+
+
+  introduceSelf() {
+    console.log(`Hi! I'm ${this.name}, and I'm in year ${this.#year}.`);
+  }
+
+  canStudyArchery() {
+    return this.#year > 1;
+  }
+
+}
+```
+与私有数据属性一样，你也可以声明私有方法。而且名称也是以 # 开头，只能在类自己的方法中调用。
+
+```JavaScript
+class Example {
+
+  somePublicMethod() {
+    this.#somePrivateMethod();
+  }
+
+  #somePrivateMethod() {
+    console.log('You called me?');
+  }
+
+}
+```
+
+# 使用JSON
+JSON 是一种按照 JavaScript 对象语法的数据格式，通常用于在网站上表示和传输数据，它是基于 JavaScript 语法，但它独立于 JavaScript，这也是为什么许多程序环境能够读取（解读）和生成 JSON。
+
+JSON 可以作为一个对象或者字符串存在，前者用于解读 JSON 中的数据，后者用于通过网络传输 JSON 数据。
+
+一个 JSON 对象可以被储存在它自己的文件中，这基本上就是一个文本文件，扩展名为 .json。
+
+- JSON 是一种纯数据格式，它只包含属性，没有方法。
+- JSON 要求在字符串和属性名称周围使用双引号。单引号无效。
+
+**对象和文本之间的转换**
+- parse(): 以文本字符串形式接受 JSON 对象作为参数，并返回相应的对象。
+- stringify(): 接收一个对象作为参数，返回一个对应的 JSON 字符串。
+
+# 异步JavaScript
+
+
+# 客户端Web API
+**Web API简介**
+应用程序接口（API，Application Programming Interface）是基于编程语言构建的结构，使开发人员更容易地创建复杂的功能。它们抽象了复杂的代码，并提供一些简单的接口规则直接使用。
+
+常见浏览器API
+- 操作文档的 API内置于浏览器中。最明显的例子是DOM（文档对象模型）API，它允许您操作 HTML 和 CSS — 创建、移除以及修改 HTML，动态地将新样式应用到您的页面，等等。
+- 客户端存储 API在 Web 浏览器中的使用变得越来越普遍 - 如果您想创建一个应用程序来保存页面加载之间的状态，甚至让设备在处于脱机状态时可用，那么在客户端存储数据将会是非常有用的。
+- 从服务器获取数据的 API 用于更新网页的一小部分是相当好用的。
+
+**操作文档**
+通过使用文档对象模型（DOM）来实现的，这是一套用于控制 HTML 和样式信息的 API，大量使用了 Document 对象。
+- 窗口是载入网页的浏览器标签，在 JavaScript 中，它由 Window 对象表示。
+- 文档是加载到窗口的实际页面。
+
+**文档对象模型**
+目前在你的每一个浏览器标签中加载的文档是由一个文档对象模型表示的。这是一个由浏览器创建的“树状结构”表示法，使 HTML 结构能够被编程语言轻松访问。
+
+![](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents/dom-screenshot.png)
+
+数上的每个条目被称为节点。
+- 根节点：树中顶层节点。
+- 子节点：直接位于另一个节点内的节点
+- 后代节点：位于另一个节点内任意位置的节点。
+- 父节点
+- 兄弟节点：DOM 树中位于同一等级的节点。
+
+**基本DOM操作**
+选择DOM元素，将他存储在变量中，使用可用的属性和方法来操作它。
+    const link = document.querySelector('a');
+    link.textContent = 'xxxx';
+    link.href = 'xxx';
+
+    Document.GetElementById()
+    Document.GetElementByTagName()
+
+创建新节点
+    const para = document.createElement('p');
+    para.textContent = 'xxxxx';
+
+**从服务器获取数据**
+现代网站和应用中另一个常见的任务是从服务端获取个别数据来更新部分网页而不用加载整个页面。
+Fetch API
+
+**客户端存储**
+传统方法：
+从早期的网络时代开始，网站就使用 cookies 来存储信息，以在网站上提供个性化的用户体验。
+
+新流派：
+- Web Storage API 提供了一种非常简单的语法，用于存储和检索较小的、由名称和相应值组成的数据项。
+- IndexedDB API 为浏览器提供了一个完整的数据库系统来存储复杂的数据。这可以用于存储从完整的用户记录到甚至是复杂的数据类型，如音频或视频文件。
+
+**存储简单数据- web storage**
+所有的 web storage 数据都包含在浏览器内两个类似于对象的结构中
+- sessionStorage：闭浏览器时数据会丢失
+- localStorage：一直保存数据，甚至到浏览器关闭又开启后也是这样
+
+    localStorage.setItem('name','Chris');
+Storage.setItem() 方法允许您在存储中保存一个数据项——它接受两个参数：数据项的名字及其值。
+
+    var myName = localStorage.getItem('name');
+Storage.getItem() 方法接受一个参数——你想要检索的数据项的名称——并返回数据项的值。
+
+    localStorage.removeItem('name');
+Storage.removeItem() 方法接受一个参数——你想要删除的数据项的名称——并从 web storage 中删除该数据项。
+
+为每个域名分离存储
+每个域都有一个单独的数据存储区。
+
+**存储复杂数据- IndexedDB**
+IndexedDB API（有时简称 IDB）是可以在浏览器中访问的一个完整的数据库系统。
+
+# Web表单
+web 表单是由一个或多个表单控件，这些控件可以是文本字段（单行或多行）、选择框、按钮、复选框或单选按钮，大部分是使用 <input> 元素创建的。
+
+![](https://developer.mozilla.org/en-US/docs/Learn/Forms/Your_first_form/form-sketch-low.jpg)
+
+`<form>`元素
+所有表单都以一个 `<form>` 元素开始：
+```html
+<form action="/my-handling-form-page" method="post">
+
+</form>
+
+```
+- action 属性定义了在提交表单时，应该把所收集的数据送给谁（URL）去处理。
+- method 属性定义了发送数据的 HTTP 方法（通常是 get 或 post）。
+
+`<label>` 元素上使用 for (en-US) 属性；它是将标签链接到表单控件的一种正规方式。这个属性引用对应的表单控件的 id。
+
+button元素
+添加一个按钮，让用户在填写完表单后发送他们的数据。
+

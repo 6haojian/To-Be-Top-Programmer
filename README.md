@@ -1,6 +1,5 @@
 # To-Be-Top-Programmer
-Hey, this is a note about learning programming from novice.
-I'll take about one year to learn programming, and also I'll take down all my knownledge and experience in this repository.
+从菜鸟到一步一步入门编程，记录学习历程。
 
 # Get Started
-The first part is about web design, I think it's the easiest way to get started with the programming. In the next 1 month, I'll learn html, css and Javascript for myself, I won't learn all of the knowledge at present, my target is just make something funny through programming.
+第一部分从Web入门，包含HTML、CSS、JavaScript，初级阶段这些都是比较适合入门，不会又太多的心智负担，
