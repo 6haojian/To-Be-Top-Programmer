@@ -64,7 +64,12 @@ JavaScript 是区分大小写的。
 
 **声明变量**
     let myAge;
-当 JavaScript 中的变量被声明的时候，程序内部会给它一个初始值 undefined。 当你对一个值为 undefined 的变量进行运算操作的时候，算出来的结果将会是 NaN，它的意思是 "Not a Number"。 如果你用 undefined 变量连接一个字符串，你将得到一个 undefined 的 字符串。
+    当 JavaScript 中的变量被声明的时候，程序内部会给它一个初始值 undefined。 当你对一个值为 undefined 的变量进行运算操作的时候，算出来的结果将会是 NaN，它的意思是 "Not a Number"。 如果你用 undefined 变量连接一个字符串，你将得到一个 undefined 的 字符串。
+
+    const myAge;
+    声明的变量是只读的。 它们是一个常量值。
+    
+    当你想要改变变量时使用 let，当你想要变量保持不变时使用 const。
 
 在 JavaScript 中，所有代码指令都会以分号结尾。
 
@@ -76,6 +81,7 @@ JavaScript 是区分大小写的。
 
 **更新变量**
     myAge = 35;
+    
 
 **变量命名规则**
 - 一般你应当坚持使用拉丁字符 (0-9,a-z,A-Z) 和下划线字符。
